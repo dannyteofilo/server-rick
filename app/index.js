@@ -2,6 +2,7 @@
 import express from "express";
 import cors from "cors";
 import authroutes from "./routes/auth.routes.js";
+import searchroutes from "./routes/search.routes.js";
 import { dbConnection } from "./database/config.js";
 
 
@@ -10,6 +11,7 @@ class Server {
     this.app = express();
     this.port = process.env.PORT;
     this.authPath = "/api/auth";
+    this.searchPath = "/api/search"
 
     //Connect to database
     this.connectDB();
@@ -35,6 +37,7 @@ class Server {
 
   routes() {
     this.app.use(this.authPath, authroutes);
+    this.app.use(this.searchPath, searchroutes);
   }
 
   listen() {
